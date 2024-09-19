@@ -1,42 +1,33 @@
-package no.hvl.dat250.jpa.tutorial.basicexample;
+package no.hvl.dat250.jpa.tutorial.basicexample
 
-import java.util.List;
+import jakarta.persistence.EntityManager
+import jakarta.persistence.Persistence
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.Query;
-
-public class Main {
-
-
-  public static void main(String[] args) {
-
-    try (
-            EntityManagerFactory factory = Persistence.createEntityManagerFactory("jpa-tutorial");
-            EntityManager em = factory.createEntityManager()) {
-
-      readAndPrintTodos(em);
-
-      // Insert new object
-      em.getTransaction().begin();
-      Todo todo = new Todo();
-      todo.setSummary("test summary");
-      todo.setDescription("test description");
-      em.persist(todo);
-      em.getTransaction().commit();
-
-      readAndPrintTodos(em);
+object Main {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        Persistence.createEntityManagerFactory("jpa-tutorial").use { factory ->
+            factory.createEntityManager().use { em ->
+                readAndPrintTodos(em)
+                // Insert new object
+                em.transaction.begin()
+                var todo = Todo()
+                todo.summary = "test summary"
+                todo.description = "test description"
+                em.persist(todo)
+                em.transaction.commit()
+                readAndPrintTodos(em)
+            }
+        }
     }
-  }
 
-  @SuppressWarnings("unchecked")
-  private static void readAndPrintTodos(EntityManager em) {
-    Query q = em.createQuery("select t from Todo t");
-    List<Todo> todoList = q.getResultList();
-    for (Todo todo : todoList) {
-      System.out.println(todo);
+    private fun readAndPrintTodos(em: EntityManager) {
+        val q = em.createQuery("select t from Todo t", Todo::class.java)
+        val todoList: List<Todo> = q.resultList
+
+        for (todo in todoList) {
+            println(todo)
+        }
+        println("Size: " + todoList.size)
     }
-    System.out.println("Size: " + todoList.size());
-  }
 }

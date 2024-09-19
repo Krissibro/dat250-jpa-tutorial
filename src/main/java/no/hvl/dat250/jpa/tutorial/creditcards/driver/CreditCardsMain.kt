@@ -1,24 +1,25 @@
-package no.hvl.dat250.jpa.tutorial.creditcards.driver;
+package no.hvl.dat250.jpa.tutorial.creditcards.driver
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import jakarta.persistence.EntityManager
+import jakarta.persistence.Persistence
 
-public class CreditCardsMain {
+object CreditCardsMain {
+    const val PERSISTENCE_UNIT_NAME: String = "jpa-tutorial"
 
-  static final String PERSISTENCE_UNIT_NAME = "jpa-tutorial";
-
-  public static void main(String[] args) {
-    try (EntityManagerFactory factory = Persistence.createEntityManagerFactory(
-        PERSISTENCE_UNIT_NAME); EntityManager em = factory.createEntityManager()) {
-      em.getTransaction().begin();
-      createObjects(em);
-      em.getTransaction().commit();
+    @JvmStatic
+    fun main(args: Array<String>) {
+        Persistence.createEntityManagerFactory(
+            PERSISTENCE_UNIT_NAME
+        ).use { factory ->
+            factory.createEntityManager().use { em ->
+                em.transaction.begin()
+                createObjects(em)
+                em.transaction.commit()
+            }
+        }
     }
 
-  }
-
-  private static void createObjects(EntityManager em) {
-    // TODO: Create object world as shown in the README.md.
-  }
+    private fun createObjects(em: EntityManager) {
+        // TODO: Create object world as shown in the README.md.
+    }
 }

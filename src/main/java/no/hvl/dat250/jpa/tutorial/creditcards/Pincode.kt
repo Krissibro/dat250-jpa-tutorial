@@ -1,24 +1,17 @@
-package no.hvl.dat250.jpa.tutorial.creditcards;
+package no.hvl.dat250.jpa.tutorial.creditcards
 
-import jakarta.persistence.*;
+import jakarta.persistence.*
 
 @Entity
-public class Pincode {
+data class Pincode(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    val id: Long? = null,
 
-    public Long getId() {
-        return id;
-    }
+    val code: String = "",
 
-    public String getCode() {
-        // TODO: implement method!
-        return null;
-    }
-
-    public Integer getCount() {
-        // TODO: implement method!
-        return null;
-    }
+    val count: Int = 0
+) {
+    // No-arg constructor for JPA
+    constructor() : this(code = "", count = 0)
 }

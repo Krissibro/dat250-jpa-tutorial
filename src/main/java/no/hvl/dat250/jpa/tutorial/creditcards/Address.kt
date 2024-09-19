@@ -1,26 +1,20 @@
-package no.hvl.dat250.jpa.tutorial.creditcards;
+package no.hvl.dat250.jpa.tutorial.creditcards
 
-import java.util.Collection;
-import jakarta.persistence.*;
+import jakarta.persistence.*
 
 @Entity
-public class Address {
+data class Address(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    val id: Long? = null,
 
-    public String getStreet() {
-        // TODO: implement method!
-        return null;
-    }
+    val street: String = "",
 
-    public Integer getNumber() {
-        // TODO: implement method!
-        return null;
-    }
+    val number: Int = 0,
 
-    public Collection<Customer> getOwners() {
-        // TODO: implement method!
-        return null;
-    }
+    @ManyToMany(mappedBy = "addresses")
+    val owners: Collection<Customer> = emptyList()
+) {
+    // No-arg constructor for JPA
+    constructor() : this(street = "", number = 0)
 }

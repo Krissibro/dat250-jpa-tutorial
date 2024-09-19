@@ -1,5 +1,6 @@
 plugins {
     application
+    id("org.jetbrains.kotlin.jvm") version "1.9.24"
 }
 
 repositories {
@@ -7,6 +8,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation(platform("org.hibernate.orm:hibernate-platform:6.6.0.Final"))
     implementation("org.hibernate.orm:hibernate-core")
     implementation("jakarta.transaction:jakarta.transaction-api")

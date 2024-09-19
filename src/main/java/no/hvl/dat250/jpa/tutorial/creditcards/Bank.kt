@@ -1,25 +1,18 @@
-package no.hvl.dat250.jpa.tutorial.creditcards;
+package no.hvl.dat250.jpa.tutorial.creditcards
 
-import jakarta.persistence.*;
-import java.util.Collection;
+import jakarta.persistence.*
 
 @Entity
-public class Bank {
+data class Bank(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    val id: Long? = null,
 
-    public Long getId() {
-        return id;
-    }
+    val name: String = "",
 
-    public String getName() {
-        // TODO: implement method!
-        return null;
-    }
-
-    public Collection<CreditCard> getOwnedCards() {
-        // TODO: implement method!
-        return null;
-    }
+    @OneToMany(mappedBy = "owningBank")
+    val ownedCards: Collection<CreditCard> = emptyList()
+) {
+    // No-arg constructor for JPA
+    constructor() : this(name = "")
 }
