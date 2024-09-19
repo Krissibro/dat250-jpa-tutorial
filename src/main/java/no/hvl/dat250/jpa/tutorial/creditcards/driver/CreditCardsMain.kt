@@ -32,23 +32,32 @@ object CreditCardsMain {
         // Create the Bank
         val bank = Bank(name = "Pengebank")
 
-        // Create the first Pincode
-        val firstPincode = Pincode(code = "123", count = 1)
+        // Create the Pincode for the Credit cards
+        val pincode = Pincode(code = "123", count = 1)
 
-        // Create the second Pincode (if you want different pincodes for each card)
-        val secondPincode = Pincode(code = "456", count = 1)
+        // Create the Credit cards
+        val firstCard = CreditCard(
+            number = 12345,
+            balance = -5000,
+            creditLimit = -10000,
+            pincode = pincode,
+            owningBank = bank,
+            customer = customer
+        )
 
-        // Create the first CreditCard
-        val firstCard = CreditCard(number = 12345, balance = -5000, creditLimit = -10000, pincode = firstPincode, owningBank = bank)
-
-        // Create the second CreditCard
-        val secondCard = CreditCard(number = 123, balance = 1, creditLimit = 2000, pincode = secondPincode, owningBank = bank)
+        val secondCard = CreditCard(number = 123,
+            balance = 1,
+            creditLimit = 2000,
+            pincode = pincode,
+            owningBank = bank,
+            customer = customer
+        )
 
         // Link credit cards to the customer
         customer.creditCards = listOf(firstCard, secondCard)
 
         // Add the cards to the bank's ownedCards
-        bank.ownedCards = listOf(firstCard, secondCard)
+        bank.ownedCards = setOf(firstCard, secondCard)
 
         // Persist everything
         em.persist(customer)
@@ -56,8 +65,6 @@ object CreditCardsMain {
         em.persist(bank)
         em.persist(firstCard)
         em.persist(secondCard)
-        em.persist(firstPincode)
-        em.persist(secondPincode)
+        em.persist(pincode)
     }
-
 }

@@ -1,6 +1,7 @@
 package no.hvl.dat250.jpa.tutorial.creditcards
 
 import jakarta.persistence.*
+import no.hvl.dat250.jpa.tutorial.creditcards.driver.CreditCardsMain
 
 @Entity
 data class CreditCard(
@@ -14,7 +15,7 @@ data class CreditCard(
 
     val creditLimit: Int = 0,
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "pincode_id")
     val pincode: Pincode = Pincode(),
 
@@ -24,4 +25,21 @@ data class CreditCard(
 
     @ManyToOne
     val owningBank: Bank = Bank()
-)
+) {
+    override fun toString(): String {
+        return "CreditCard(id=$id, number=$number, balance=$balance, creditLimit=$creditLimit)"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || javaClass != other?.javaClass) return false
+
+        other as CreditCard
+
+        return id != null && id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
+    }
+}
