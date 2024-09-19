@@ -11,8 +11,5 @@ data class Bank(
     val name: String = "",
 
     @OneToMany(mappedBy = "owningBank")
-    val ownedCards: Collection<CreditCard> = emptyList()
-) {
-    // No-arg constructor for JPA
-    constructor() : this(name = "")
-}
+    var ownedCards: Collection<CreditCard> = emptyList()
+)

@@ -11,7 +11,4 @@ data class Pincode(
     val code: String = "",
 
     val count: Int = 0
-) {
-    // No-arg constructor for JPA
-    constructor() : this(code = "", count = 0)
-}
+)

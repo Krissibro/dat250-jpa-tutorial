@@ -15,11 +15,13 @@ data class CreditCard(
     val creditLimit: Int = 0,
 
     @OneToOne
+    @JoinColumn(name = "pincode_id")
     val pincode: Pincode = Pincode(),
 
     @ManyToOne
+    @JoinColumn(name = "customer_id")  // This defines the foreign key in the CreditCard table
+    var customer: Customer? = null,
+
+    @ManyToOne
     val owningBank: Bank = Bank()
-) {
-    // No-arg constructor for JPA
-    constructor() : this(number = 0, balance = 0, creditLimit = 0)
-}
+)

@@ -8,7 +8,7 @@ data class Customer(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
 
-    val name: String = "",
+    var name: String = "",
 
     @ManyToMany
     @JoinTable(
@@ -16,11 +16,13 @@ data class Customer(
         joinColumns = [JoinColumn(name = "customer_id")],
         inverseJoinColumns = [JoinColumn(name = "address_id")]
     )
-    val addresses: Collection<Address> = emptyList(),
+    var addresses: Collection<Address> = emptyList(),
 
-    @OneToMany(mappedBy = "customer")
-    val creditCards: Collection<CreditCard> = emptyList()
+    @OneToMany(mappedBy = "customer")  // This points to the customer field in CreditCard
+    var creditCards: Collection<CreditCard> = emptyList()
 ) {
-    // No-arg constructor for JPA
-    constructor() : this(name = "")
+    override fun toString(): String {
+        return "Customer(id=$id, name=$name)"
+    }
 }
+

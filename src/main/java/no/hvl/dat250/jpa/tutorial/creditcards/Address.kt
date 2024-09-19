@@ -13,8 +13,9 @@ data class Address(
     val number: Int = 0,
 
     @ManyToMany(mappedBy = "addresses")
-    val owners: Collection<Customer> = emptyList()
+    var owners: Collection<Customer> = emptyList()
 ) {
-    // No-arg constructor for JPA
-    constructor() : this(street = "", number = 0)
+    override fun toString(): String {
+        return "Address(id=$id, street=$street, number=$number)"
+    }
 }
