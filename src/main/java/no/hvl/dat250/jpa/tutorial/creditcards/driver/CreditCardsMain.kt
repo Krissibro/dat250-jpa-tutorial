@@ -27,7 +27,7 @@ object CreditCardsMain {
         // Create the Address
         val address = Address(street = "Inndalsveien", number = 28)
         customer.addresses = listOf(address)
-        address.owners = listOf(customer)
+        address.owners = setOf(customer)
 
         // Create the Bank
         val bank = Bank(name = "Pengebank")

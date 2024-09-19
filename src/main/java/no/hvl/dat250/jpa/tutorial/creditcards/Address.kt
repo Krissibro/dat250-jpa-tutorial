@@ -13,7 +13,7 @@ data class Address(
     val number: Int = 0,
 
     @ManyToMany(mappedBy = "addresses")
-    var owners: Collection<Customer> = emptyList()
+    var owners: Set<Customer> = setOf()
 ) {
     override fun toString(): String {
         return "Address(id=$id, street=$street, number=$number)"
