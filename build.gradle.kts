@@ -15,6 +15,7 @@ dependencies {
     implementation("com.h2database:h2:2.2.220")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("com.rabbitmq:amqp-client:5.17.1")
 }
 
 java {
