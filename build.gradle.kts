@@ -16,6 +16,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.3")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("com.rabbitmq:amqp-client:5.17.1")
+    implementation("org.postgresql:postgresql:42.7.2")
 }
 
 java {
