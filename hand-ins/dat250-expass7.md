@@ -24,7 +24,14 @@ and getting the right ports to work both within the docker container and locally
 I had to add a specific url `http://backend:8080` into the vite config for the frontend to communicate with the backend inside the container.
 And I also added a script to the frontend which makes it wait for the backend before running.
 
-But, in the end running the docker container, both backend and frontend now works just fine.
+Using these commands I build, and then run the image. 
+```
+docker-compose build
+docker-compose up
+```
+
+After running the image, both backend and frontend works just fine.
+
 
 [Link to commit containing the DOCKERFILES I created](https://github.com/Krissibro/DAT250-Sploinkyboink/commit/eb3886dcf71f572f8ff5c5706df6fcb4c20784dc)
 
